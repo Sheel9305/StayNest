@@ -1,3 +1,4 @@
+require("dotenv").config();
 const mongoose = require("mongoose");
 const Listing = require("../models/listing");
 const Review = require("../models/review");
