@@ -1,0 +1,141 @@
+<% layout("/layouts/boilerplate") %> 
+<% const currentCategory = typeof category!== 'undefined' ? category : null; %>
+
+<div id="filters" class="d-none d-md-flex"  >
+  <a
+    href="/listings?category=Trending"
+    class="filter <%= currentCategory === 'Trending' ? 'active' : '' %>"
+  >
+    <div><i class="fa-solid fa-fire"></i></div>
+    <p>Trending</p>
+  </a>
+  <a
+    href="/listings?category=Rooms"
+    class="filter <%= currentCategory === 'Rooms' ? 'active' : '' %>"
+  >
+    <div><i class="fa-solid fa-bed"></i></div>
+    <p>Rooms</p>
+  </a>
+  <a
+    href="/listings?category=Iconic City"
+    class="filter <%= currentCategory === 'Iconic City' ? 'active' : '' %>"
+  >
+    <div><i class="fa-solid fa-mountain-city"></i></div>
+    <p>Iconic Cities</p>
+  </a>
+  <a
+    href="/listings?category=Mountains"
+    class="filter <%= currentCategory === 'Mountains' ? 'active' : '' %>"
+  >
+    <div><i class="fa-solid fa-mountain"></i></div>
+    <p>Mountains</p>
+  </a>
+  <a
+    href="/listings?category=Castle"
+    class="filter <%= currentCategory === 'Castle' ? 'active' : '' %>"
+  >
+    <div><i class="fa-solid fa-place-of-worship"></i></div>
+    <p>Castles</p>
+  </a>
+  <a
+    href="/listings?category=Amazing Pool"
+    class="filter <%= currentCategory === 'Amazing Pool' ? 'active' : '' %>"
+  >
+    <div><i class="fa-solid fa-person-swimming"></i></div>
+    <p>Amazing Pools</p>
+  </a>
+  <a
+    href="/listings?category=Camping"
+    class="filter <%= currentCategory === 'Camping' ? 'active' : '' %>"
+  >
+    <div><i class="fa-solid fa-campground"></i></div>
+    <p>Camping</p>
+  </a>
+  <a
+    href="/listings?category=Farms"
+    class="filter <%= currentCategory === 'Farms' ? 'active' : '' %>"
+  >
+    <div><i class="fa-solid fa-cow"></i></div>
+    <p>Farms</p>
+  </a>
+  <a
+    href="/listings?category=Arctic"
+    class="filter <%= currentCategory === 'Arctic' ? 'active' : '' %>"
+  >
+    <div><i class="fa-solid fa-snowman"></i></div>
+    <p>Arctic</p>
+  </a>
+
+  <div class="tax-toggle">
+    <div class="form-check-reverse form-switch">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="switchCheckDefault"
+      />
+      <label class="form-check-label" for="switchCheckDefault"
+        >Display Price With Taxes</label
+      >
+    </div>
+  </div>
+</div>
+
+<!-- Responsive Dropdown for Small Screens -->
+<div id="responsive-filters" class="d-block d-md-none my-3">
+  <select id="categoryDropdown" class="form-select">
+    <option disabled selected>Select Category</option>
+    <option value="Trending">🔥 Trending</option>
+    <option value="Rooms">🛏️ Rooms</option>
+    <option value="Iconic City">🏙️ Iconic Cities</option>
+    <option value="Mountains">⛰️ Mountains</option>
+    <option value="Castle">🏰 Castles</option>
+    <option value="Amazing Pool">🏊 Amazing Pools</option>
+    <option value="Camping">🏕️ Camping</option>
+    <option value="Farms">🐄 Farms</option>
+    <option value="Arctic">☃️ Arctic</option>
+  </select>
+
+  <div class="tax-toggle-sm">
+    <div class="form-check-reverse form-switch">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="switchCheckDefaultSm"
+      />
+      <label class="form-check-label" for="switchCheckDefaultSm"
+        >Price with Taxes</label>
+    </div>
+  </div>
+</div>
+
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+  <% if (allListings.length === 0) { %>
+  <div class="no-results">
+    <h3>😔 Sorry, no Airbnbs are available at this moment.</h3>
+  </div>
+  <% } else { %> <% for(let listing of allListings){ %>
+  <a href="/listings/<%= listing._id %>" class="listing-link">
+    <div class="card col listing-card">
+      <img
+        src="<%= listing.image.url.replace('/upload/', '/upload/f_auto,q_auto,w_800/') %>"
+        class="card-img-top"
+        alt="listing image"
+        loading="lazy"
+        style="height: 20rem; object-fit: cover"
+      />
+      <div class="card-img-overlay"></div>
+      <div class="card-body">
+        <p class="card-text">
+          <b><%= listing.title %></b><br />
+          <span class="base-price" data-base-price="<%= listing.price %>">
+            &#8377;<%= listing.price.toLocaleString("en-IN") %> </span
+          >/night
+          <i class="tax-info" style="display: none"> (incl. 18% GST)</i>
+        </p>
+      </div>
+    </div>
+  </a>
+  <% } %><% } %>
+</div>
