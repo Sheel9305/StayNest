@@ -3,14 +3,15 @@ const Listing = require("../models/listing");
 const Review = require("../models/review");
 const initData = require("./data");
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/staynest";
+// const MONGO_URL = "mongodb://127.0.0.1:27017/staynest";
+const dbUrl = process.env.ATLASDB_URL;
 
 main()
   .then(() => console.log("MongoDB connection successful"))
   .catch((err) => console.log("Connection error:", err));
 
 async function main() {
-  await mongoose.connect(MONGO_URL);
+  await mongoose.connect(dbUrl);
 }
 
 const initDb = async () => {
