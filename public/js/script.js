@@ -61,16 +61,16 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Tax Toggle Switch
-function handleTaxToggle() {
+function handleTaxToggle(isChecked) {
   const priceElements = document.getElementsByClassName("base-price");
   const taxInfoElements = document.getElementsByClassName("tax-info");
 
   for (let i = 0; i < priceElements.length; i++) {
     const priceEl = priceElements[i];
-    const basePrice = parseFloat(priceEl.dataset.basePrice);
+    const basePrice = parseFloat(priceEl.getAttribute("data-base-price"));
     const taxInfo = taxInfoElements[i];
 
-    if (taxInfo.style.display !== "inline") {
+    if (isChecked) {
       const finalPrice = basePrice * 1.18;
       priceEl.textContent = `₹${finalPrice.toLocaleString("en-IN", {
         maximumFractionDigits: 0,
@@ -85,14 +85,18 @@ function handleTaxToggle() {
 
 // Attach event listener to both desktop and mobile switches
 const desktopToggle = document.getElementById("switchCheckDefault");
-const mobileToggle = document.querySelector(".tax-toggle-sm");
+const mobileToggle = document.getElementById("switchCheckDefaultSm");
 
 if (desktopToggle) {
-  desktopToggle.addEventListener("click", handleTaxToggle);
+  desktopToggle.addEventListener("click", () => {
+    handleTaxToggle(desktopToggle.checked);
+  });
 }
 
 if (mobileToggle) {
-  mobileToggle.addEventListener("click", handleTaxToggle);
+  mobileToggle.addEventListener("click", () => {
+    handleTaxToggleFromCheckbox(mobileToggle.checked);
+  });
 }
 
 
