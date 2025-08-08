@@ -88,13 +88,13 @@ const desktopToggle = document.getElementById("switchCheckDefault");
 const mobileToggle = document.getElementById("switchCheckDefaultSm");
 
 if (desktopToggle) {
-  desktopToggle.addEventListener("click", () => {
+  desktopToggle.addEventListener("change", () => {
     handleTaxToggle(desktopToggle.checked);
   });
 }
 
 if (mobileToggle) {
-  mobileToggle.addEventListener("click", () => {
+  mobileToggle.addEventListener("change", () => {
     handleTaxToggle(mobileToggle.checked);
   });
 }
