@@ -95,7 +95,7 @@ if (desktopToggle) {
 
 if (mobileToggle) {
   mobileToggle.addEventListener("click", () => {
-    handleTaxToggleFromCheckbox(mobileToggle.checked);
+    handleTaxToggle(mobileToggle.checked);
   });
 }
 
