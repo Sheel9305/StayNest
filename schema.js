@@ -10,7 +10,6 @@ module.exports.listingSchema = Joi.object({
     image: Joi.string().allow("", null),
     category: Joi.string()
       .valid(
-        "rooms",
         "Rooms",
         "Iconic City",
         "Mountains",
